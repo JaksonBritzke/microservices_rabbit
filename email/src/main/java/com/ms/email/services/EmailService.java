@@ -1,8 +1,7 @@
 package com.ms.email.services;
 
-import com.ms.email.enums.StatusEmail;
-import com.ms.email.models.EmailModel;
-import com.ms.email.repositories.EmailRepository;
+import java.time.LocalDateTime;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
@@ -10,7 +9,9 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
+import com.ms.email.enums.StatusEmail;
+import com.ms.email.models.EmailModel;
+import com.ms.email.repositories.EmailRepository;
 
 @Service
 public class EmailService {
@@ -28,7 +29,7 @@ public class EmailService {
 
     @Transactional
     public EmailModel sendEmail(EmailModel emailModel) {
-        try{
+        try {
             emailModel.setSendDateEmail(LocalDateTime.now());
             emailModel.setEmailFrom(emailFrom);
 
@@ -39,7 +40,7 @@ public class EmailService {
             emailSender.send(message);
 
             emailModel.setStatusEmail(StatusEmail.SENT);
-        } catch (MailException e){
+        } catch (MailException e) {
             emailModel.setStatusEmail(StatusEmail.ERROR);
         } finally {
             return emailRepository.save(emailModel);

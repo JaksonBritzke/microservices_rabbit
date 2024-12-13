@@ -1,9 +1,9 @@
 package com.ms.email.repositories;
 
+
+import org.springframework.data.mongodb.repository.MongoRepository;
+
 import com.ms.email.models.EmailModel;
-import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.UUID;
-
-public interface EmailRepository extends JpaRepository<EmailModel, UUID> {
+public interface EmailRepository extends MongoRepository<EmailModel, String> {
 }

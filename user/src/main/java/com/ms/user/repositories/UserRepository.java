@@ -1,9 +1,8 @@
 package com.ms.user.repositories;
 
+import org.springframework.data.mongodb.repository.MongoRepository;
+
 import com.ms.user.models.UserModel;
-import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.UUID;
-
-public interface UserRepository extends JpaRepository<UserModel, UUID> {
+public interface UserRepository extends MongoRepository<UserModel, String> {
 }
